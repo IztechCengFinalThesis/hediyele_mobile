@@ -12,13 +12,75 @@ final authStateProvider = StreamProvider<User?>((ref) {
 
 final authControllerProvider =
     StateNotifierProvider<AuthController, AsyncValue<void>>((ref) {
-  return AuthController(ref.watch(authServiceProvider));
-});
+      return AuthController(ref.watch(authServiceProvider));
+    });
 
 class AuthController extends StateNotifier<AsyncValue<void>> {
   final AuthService _authService;
 
   AuthController(this._authService) : super(const AsyncValue.data(null));
+
+  Future<void> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    state = const AsyncValue.loading();
+    try {
+      await _authService.signInWithEmailAndPassword(email, password);
+      await _authService.checkEmailVerified();
+      state = const AsyncValue.data(null);
+    } catch (error) {
+      state = AsyncValue.error(error, StackTrace.current);
+      rethrow;
+    }
+  }
+
+  Future<void> createUserWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    state = const AsyncValue.loading();
+    try {
+      await _authService.createUserWithEmailAndPassword(email, password);
+      state = const AsyncValue.data(null);
+    } catch (error) {
+      state = AsyncValue.error(error, StackTrace.current);
+      rethrow;
+    }
+  }
+
+  Future<void> checkEmailVerified() async {
+    state = const AsyncValue.loading();
+    try {
+      await _authService.checkEmailVerified();
+      state = const AsyncValue.data(null);
+    } catch (error) {
+      state = AsyncValue.error(error, StackTrace.current);
+      rethrow;
+    }
+  }
+
+  Future<void> resendVerificationEmail() async {
+    state = const AsyncValue.loading();
+    try {
+      await _authService.resendVerificationEmail();
+      state = const AsyncValue.data(null);
+    } catch (error) {
+      state = AsyncValue.error(error, StackTrace.current);
+      rethrow;
+    }
+  }
+
+  Future<void> sendPasswordResetEmail(String email) async {
+    state = const AsyncValue.loading();
+    try {
+      await _authService.sendPasswordResetEmail(email);
+      state = const AsyncValue.data(null);
+    } catch (error) {
+      state = AsyncValue.error(error, StackTrace.current);
+      rethrow;
+    }
+  }
 
   Future<void> verifyPhoneNumber({
     required String phoneNumber,
