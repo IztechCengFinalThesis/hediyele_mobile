@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "459002135610",
+    "project_id": "hediyele-mobile",
+    "storage_bucket": "hediyele-mobile.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:459002135610:android:c8f4c177aec9f639c9e103",
+        "android_client_info": {
+          "package_name": "com.example.hediyele_mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIMn67xIdN27lzdec_VrPuHPQ1S-1B0k4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
